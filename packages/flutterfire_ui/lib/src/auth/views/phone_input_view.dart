@@ -23,6 +23,7 @@ class PhoneInputView extends StatefulWidget {
   final PhoneNumberSubmitCallback? onSubmit;
   final WidgetBuilder? subtitleBuilder;
   final WidgetBuilder? footerBuilder;
+  final String& initialCountryCode;
 
   const PhoneInputView({
     Key? key,
@@ -33,6 +34,7 @@ class PhoneInputView extends StatefulWidget {
     this.onSubmit,
     this.subtitleBuilder,
     this.footerBuilder,
+    this.initialCountryCode,
   }) : super(key: key);
 
   @override
@@ -61,7 +63,7 @@ class _PhoneInputViewState extends State<PhoneInputView> {
   @override
   Widget build(BuildContext context) {
     final l = FlutterFireUILocalizations.labelsOf(context);
-    final countryCode = Localizations.localeOf(context).countryCode;
+    final countryCode = widget.initialCountryCode?? Localizations.localeOf(context).countryCode;
 
     return AuthFlowBuilder<PhoneAuthController>(
       flowKey: widget.flowKey,
